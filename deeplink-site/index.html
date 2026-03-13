@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open MyNewApp | Deep Link Demo</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-glow"></div>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span class="logo-icon">✨</span>
+                <h1>MyNewApp</h1>
+            </div>
+            <p class="subtitle">Experience the future of connectivity. Seamlessly transition from web to mobile.</p>
+        </header>
+
+        <main class="card">
+            <h2>Launch App Support</h2>
+            <p>Select an option below to open the application directly on your device.</p>
+            
+            <div class="button-group">
+                <button onclick="launchApp('mynewapp://')" class="btn primary">
+                    <span class="btn-text">Open Home Page</span>
+                    <span class="btn-subtext">mynewapp://</span>
+                </button>
+                
+                <button onclick="launchApp('mynewapp://details?id=99&source=website')" class="btn secondary">
+                    <span class="btn-text">Open Special Offer</span>
+                    <span class="btn-subtext">Deep Link with Parameters</span>
+                </button>
+            </div>
+        </main>
+
+        <footer>
+            <p>Don't have the app? <a href="#">Download on Google Play</a></p>
+        </footer>
+    </div>
+
+    <script>
+        function launchApp(url) {
+            const start = Date.now();
+            window.location.href = url;
+
+            // Simple fallback logic: if the app doesn't open within 2 seconds, 
+            // the user likely doesn't have it installed.
+            setTimeout(() => {
+                if (Date.now() - start < 2500) {
+                    if (confirm("It looks like the app isn't installed. Would you like to go to the download page?")) {
+                        // In a real app, this would be your Play Store / App Store link
+                        alert("Redirecting to store... (Demo mode)");
+                    }
+                }
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
